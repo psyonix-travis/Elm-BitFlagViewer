@@ -1,18 +1,18 @@
-module Delimiter exposing (..)
+module Delimiter exposing (format)
 
 
-type alias Params =
+type alias FormatParams =
     { interval : Int
     , string : String
     }
 
 
-format : Params -> String -> String
-format del str =
-    formatInterval del "" str
+format : Int -> String -> String -> String
+format interval delimiter formatStr =
+    formatInterval (FormatParams interval delimiter) "" formatStr
 
 
-formatInterval : Params -> String -> String -> String
+formatInterval : FormatParams -> String -> String -> String
 formatInterval del formatStr inStr =
     if (String.length inStr == 0) then
         formatStr
