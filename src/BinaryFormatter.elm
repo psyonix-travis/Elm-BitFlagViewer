@@ -1,6 +1,17 @@
 module BinaryFormatter exposing (toBinary)
 
 import Bitwise
+import Delimiter exposing (Params, format)
+
+
+delimiterInterval : Int
+delimiterInterval =
+    4
+
+
+delimiter : String
+delimiter =
+    " "
 
 
 toBinary : Int -> String
@@ -19,45 +30,12 @@ intToBits value =
 formatBin : String -> String
 formatBin value =
     String.padLeft (formatBinGetLeftPadCount value) '0' value
-        |> formatBinStep ""
-
-
-delimiterInterval : Int
-delimiterInterval =
-    4
-
-
-delimiter : String
-delimiter =
-    " "
+        |> format (Delimiter.Params delimiterInterval delimiter)
 
 
 formatBinGetLeftPadCount : String -> Int
 formatBinGetLeftPadCount value =
     (String.length value) + (delimiterInterval - ((String.length value) % delimiterInterval))
-
-
-formatBinStep : String -> String -> String
-formatBinStep formatStr inStr =
-    if (String.length inStr == 0) then
-        formatStr
-    else
-        let
-            newFormatStr =
-                (String.right delimiterInterval inStr) ++ (conditionalAddDelimiter formatStr)
-
-            remainingStr =
-                String.left (String.length inStr - delimiterInterval) inStr
-        in
-            formatBinStep newFormatStr remainingStr
-
-
-conditionalAddDelimiter : String -> String
-conditionalAddDelimiter val =
-    if (String.length val == 0) then
-        val
-    else
-        delimiter ++ val
 
 
 getMSB : Int -> String
