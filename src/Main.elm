@@ -3,7 +3,8 @@ module App exposing (..)
 import Html exposing (Html, Attribute, div, text, input, program)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onInput)
-import BinaryFormatter exposing (toBinary)
+import BinaryFormatter exposing (format)
+import BinaryConverter exposing (convert)
 
 
 -- MODEL
@@ -48,7 +49,7 @@ inputToBits model =
                 msg
 
             Ok val ->
-                "BIN  " ++ toBinary val
+                "BIN  " ++ BinaryFormatter.format (BinaryConverter.convert val)
 
 
 
