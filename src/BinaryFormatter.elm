@@ -1,6 +1,6 @@
 module BinaryFormatter exposing (format)
 
-import Delimiter exposing (Params, format)
+import Delimiter exposing (format)
 
 
 interval : Int
@@ -11,7 +11,7 @@ interval =
 format : String -> String
 format value =
     String.padLeft (getLeftPadCount value) '0' value
-        |> Delimiter.format (Delimiter.Params interval " ")
+        |> Delimiter.format interval " "
 
 
 getLeftPadCount : String -> Int
