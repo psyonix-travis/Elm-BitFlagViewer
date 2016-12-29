@@ -9,11 +9,6 @@ delimiterInterval =
     4
 
 
-delimiter : String
-delimiter =
-    " "
-
-
 toBinary : Int -> String
 toBinary val =
     formatBin (intToBits val)
@@ -27,18 +22,24 @@ intToBits value =
         intToBits (Bitwise.shiftRightBy 1 value) ++ (getMSB value)
 
 
-formatBin : String -> String
-formatBin value =
-    String.padLeft (formatBinGetLeftPadCount value) '0' value
-        |> format (Delimiter.Params delimiterInterval delimiter)
-
-
-formatBinGetLeftPadCount : String -> Int
-formatBinGetLeftPadCount value =
-    (String.length value) + (delimiterInterval - ((String.length value) % delimiterInterval))
-
-
 getMSB : Int -> String
 getMSB value =
-    Bitwise.and 1 value
-        |> toString
+    if (Bitwise.and 1 value) /= 0 then
+        "1"
+    else
+        "0"
+
+
+formatBin : String -> String
+formatBin value =
+    String.padLeft (getLeftPadCount value) '0' value
+        |> format (Delimiter.Params delimiterInterval " ")
+
+
+getLeftPadCount : String -> Int
+getLeftPadCount value =
+    let
+        strLen =
+            String.length value
+    in
+        strLen + delimiterInterval - (strLen % delimiterInterval)
