@@ -44,12 +44,20 @@ formatBinStep formatStr inStr =
     else
         let
             newFormatStr =
-                (String.right delimiterInterval inStr) ++ delimiter ++ formatStr
+                (String.right delimiterInterval inStr) ++ (conditionalAddDelimiter formatStr)
 
             remainingStr =
                 String.left (String.length inStr - delimiterInterval) inStr
         in
             formatBinStep newFormatStr remainingStr
+
+
+conditionalAddDelimiter : String -> String
+conditionalAddDelimiter val =
+    if (String.length val == 0) then
+        val
+    else
+        delimiter ++ val
 
 
 getMSB : Int -> String
