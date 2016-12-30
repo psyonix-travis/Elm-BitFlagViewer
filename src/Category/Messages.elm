@@ -1,7 +1,7 @@
 module Category.Messages exposing (..)
 
 import Http
-import Category.Models exposing (AllCategories, Category)
+import Category.Models exposing (Category)
 import Flag.Messages
 
 

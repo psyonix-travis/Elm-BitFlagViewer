@@ -9,6 +9,5 @@ import Flag.View exposing (list)
 view : Category -> Html Msg
 view category =
     div []
-        [ text category.label
-        , Html.map FlagMsg (Flag.View.list category.flags)
+        [ Html.map FlagMsg (Flag.View.list category.label category.flags)
         ]
