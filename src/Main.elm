@@ -5,18 +5,23 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (onInput)
 import BinaryFormatter exposing (format)
 import BinaryConverter exposing (convert)
+import Category.View exposing (..)
+import Category.Models exposing (..)
+import Category.Messages exposing (..)
 
 
 -- MODEL
 
 
 type alias Model =
-    String
+    { input : String
+    , category : Category
+    }
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( "", Cmd.none )
+    ( { input = "", category = Category.Models.stub }, Cmd.none )
 
 
 
@@ -25,6 +30,7 @@ init =
 
 type Msg
     = Change String
+    | CategoryMsg Category.Messages.Msg
 
 
 
@@ -35,14 +41,17 @@ view : Model -> Html Msg
 view model =
     div []
         [ input [ placeholder "Object Flags", onInput Change ] []
-        , div [] [ text (inputToBits model) ]
+        , div []
+            [ text (inputToBits model.input)
+            , Html.map CategoryMsg (Category.View.view model.category)
+            ]
         ]
 
 
 inputToBits : String -> String
 inputToBits model =
     if String.length model == 0 then
-        model
+        ""
     else
         case String.toInt model of
             Err msg ->
@@ -60,7 +69,10 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Change newContent ->
-            ( newContent, Cmd.none )
+            ( { model | input = newContent }, Cmd.none )
+
+        CategoryMsg catMsg ->
+            ( model, Cmd.none )
 
 
 
