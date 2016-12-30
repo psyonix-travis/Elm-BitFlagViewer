@@ -7,6 +7,7 @@ import Flag.Messages
 
 type Msg
     = OnFetchAll (Result Http.Error (List Category))
+    | InputChange String
     | FlagMsg Flag.Messages.Msg
 
 

@@ -14,6 +14,9 @@ update msg category =
         OnFetchAll (Err error) ->
             ( UpdateError (httpErrorMapper error), Cmd.none )
 
+        InputChange newContent ->
+            ( CategorySelected { category | input = newContent }, Cmd.none )
+
         FlagMsg subMsg ->
             ( CategorySelected category, Cmd.none )
 

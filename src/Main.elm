@@ -1,10 +1,7 @@
 module App exposing (..)
 
 import Html exposing (Html, Attribute, div, text, input, program, span)
-import Html.Attributes exposing (..)
-import Html.Events exposing (onInput)
-import BinaryFormatter exposing (format)
-import BinaryConverter exposing (convert)
+import Html.Attributes exposing (class)
 import Category.View exposing (..)
 import Category.Models exposing (..)
 import Category.Messages exposing (..)
@@ -16,15 +13,14 @@ import Category.Update exposing (..)
 
 
 type alias Model =
-    { input : String
-    , error : String
+    { error : String
     , category : Category
     }
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( { input = "", error = "", category = Category.Models.default }, Cmd.map CategoryMsg fetchAll )
+    ( { error = "", category = Category.Models.default }, Cmd.map CategoryMsg fetchAll )
 
 
 
@@ -32,8 +28,7 @@ init =
 
 
 type Msg
-    = Change String
-    | CategoryMsg Category.Messages.Msg
+    = CategoryMsg Category.Messages.Msg
 
 
 
@@ -44,25 +39,8 @@ view : Model -> Html Msg
 view model =
     div []
         [ div [] [ span [ class "error" ] [ text model.error ] ]
-        , input [ placeholder "Object Flags", onInput Change ] []
-        , div []
-            [ text (inputToBits model.input)
-            , Html.map CategoryMsg (Category.View.view model.category model.input)
-            ]
+        , Html.map CategoryMsg (Category.View.view model.category)
         ]
-
-
-inputToBits : String -> String
-inputToBits model =
-    if String.length model == 0 then
-        ""
-    else
-        case String.toInt model of
-            Err msg ->
-                msg
-
-            Ok val ->
-                "BIN  " ++ BinaryFormatter.format (BinaryConverter.convert val)
 
 
 
@@ -72,9 +50,6 @@ inputToBits model =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        Change newContent ->
-            ( { model | input = newContent }, Cmd.none )
-
         CategoryMsg subMsg ->
             let
                 ( updateMsg, cmd ) =
