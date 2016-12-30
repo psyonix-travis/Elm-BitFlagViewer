@@ -1,8 +1,15 @@
 module Category.Messages exposing (..)
 
+import Http
+import Category.Models exposing (AllCategories, Category)
 import Flag.Messages
 
 
 type Msg
-    = NoOp
+    = OnFetchAll (Result Http.Error (List Category))
     | FlagMsg Flag.Messages.Msg
+
+
+type UpdateMsg
+    = CategorySelected Category
+    | UpdateError String
