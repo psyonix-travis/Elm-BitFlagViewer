@@ -1,12 +1,12 @@
-module Category.Commands exposing (..)
+module Commands exposing (..)
 
 import Http
 import Json.Decode as Decode exposing (field)
 import ParseInt exposing (parseIntHex)
-import Category.Messages exposing (..)
 import Category.Models exposing (..)
 import Flag.Models exposing (..)
 import BinaryConverter exposing (convertToList)
+import Messages exposing (..)
 
 
 fetchAll : Cmd Msg

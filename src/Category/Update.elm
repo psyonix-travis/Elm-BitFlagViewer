@@ -5,20 +5,14 @@ import Category.Messages exposing (..)
 import Category.Models exposing (..)
 
 
-update : Msg -> Category -> ( UpdateMsg, Cmd Msg )
+update : Msg -> Category -> ( Category, Cmd Msg )
 update msg category =
     case msg of
-        OnFetchAll (Ok categories) ->
-            ( CategorySelected (Maybe.withDefault category (List.head categories)), Cmd.none )
-
-        OnFetchAll (Err error) ->
-            ( UpdateError (httpErrorMapper error), Cmd.none )
-
         InputChange newContent ->
-            ( CategorySelected { category | input = newContent }, Cmd.none )
+            ( { category | input = newContent }, Cmd.none )
 
         FlagMsg subMsg ->
-            ( CategorySelected category, Cmd.none )
+            ( category, Cmd.none )
 
 
 httpErrorMapper : Http.Error -> String

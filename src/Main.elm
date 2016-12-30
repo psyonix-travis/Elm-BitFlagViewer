@@ -5,11 +5,16 @@ import Html.Attributes exposing (class)
 import Category.View exposing (..)
 import Category.Models exposing (..)
 import Category.Messages exposing (..)
-import Category.Commands exposing (..)
 import Category.Update exposing (..)
+import Commands exposing (..)
+import Messages exposing (..)
 
 
 -- MODEL
+
+
+type alias Msg =
+    Messages.Msg
 
 
 type alias Model =
@@ -20,18 +25,11 @@ type alias Model =
 
 init : ( Model, Cmd Msg )
 init =
-    ( { error = "", category = Category.Models.default }, Cmd.map CategoryMsg fetchAll )
+    ( { error = "", category = Category.Models.default }, fetchAll )
 
 
 
 -- MESSAGES
-
-
-type Msg
-    = CategoryMsg Category.Messages.Msg
-
-
-
 -- VIEW
 
 
@@ -47,20 +45,21 @@ view model =
 -- UPDATE
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Messages.Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        OnFetchAll (Ok categories) ->
+            ( { model | category = Maybe.withDefault model.category <| List.head categories }, Cmd.none )
+
+        OnFetchAll (Err error) ->
+            ( { model | error = httpErrorMapper error }, Cmd.none )
+
         CategoryMsg subMsg ->
             let
-                ( updateMsg, cmd ) =
+                ( newCategory, cmd ) =
                     Category.Update.update subMsg model.category
             in
-                case updateMsg of
-                    Category.Messages.CategorySelected newCategory ->
-                        ( { model | category = newCategory }, Cmd.map CategoryMsg cmd )
-
-                    Category.Messages.UpdateError error ->
-                        ( { model | error = error }, Cmd.none )
+                ( { model | category = newCategory }, Cmd.map CategoryMsg cmd )
 
 
 
