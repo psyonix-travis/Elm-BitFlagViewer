@@ -11,10 +11,13 @@ update : Messages.Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         OnFetchAll (Ok categories) ->
-            ( { error = model.error, categories = categories, category = Maybe.withDefault model.category <| List.head categories }, Cmd.none )
+            ( { model | categories = categories, category = Maybe.withDefault model.category <| List.head categories }, Cmd.none )
 
         OnFetchAll (Err error) ->
             ( { model | error = httpErrorMapper error }, Cmd.none )
+
+        InputChange input ->
+            ( { model | input = input }, Cmd.none )
 
         CategoryChange label ->
             ( { model | category = lookupCategoryByLabel label model.categories }, Cmd.none )

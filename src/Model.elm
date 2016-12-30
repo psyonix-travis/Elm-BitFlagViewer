@@ -4,7 +4,8 @@ import Category.Models exposing (Category)
 
 
 type alias Model =
-    { error : String
+    { input : String
+    , error : String
     , categories : List Category
     , category : Category
     }

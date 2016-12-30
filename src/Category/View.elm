@@ -1,41 +1,20 @@
 module Category.View exposing (..)
 
 import Bitwise
-import Html exposing (Html, Attribute, div, text, input, program, span)
-import Html.Attributes exposing (placeholder)
-import Html.Events exposing (onInput)
+import Html exposing (Html, Attribute, div, text)
 import Category.Models exposing (..)
 import Category.Messages exposing (..)
 import Flag.View exposing (list)
 import Flag.Models exposing (Flag)
-import BinaryFormatter exposing (format)
-import BinaryConverter exposing (convert)
 
 
-view : Category -> Html Msg
-view category =
+view : String -> Category -> Html Msg
+view input category =
     div []
-        [ input [ placeholder category.label, onInput InputChange ] []
-        , div []
-            [ text (inputToBits category.input)
-            , filterFlags category.input category.flags
-                |> Flag.View.list
-                |> Html.map FlagMsg
-            ]
+        [ filterFlags input category.flags
+            |> Flag.View.list
+            |> Html.map FlagMsg
         ]
-
-
-inputToBits : String -> String
-inputToBits model =
-    if String.length model == 0 then
-        " "
-    else
-        case String.toInt model of
-            Err msg ->
-                msg
-
-            Ok val ->
-                "BIN  " ++ BinaryFormatter.format (BinaryConverter.convert val)
 
 
 filterFlags : String -> List Flag -> List Flag

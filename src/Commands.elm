@@ -31,10 +31,9 @@ collectionDecoder =
 
 categoryDecoder : Decode.Decoder Category
 categoryDecoder =
-    Decode.map3 Category
+    Decode.map2 Category
         (field "label" Decode.string)
         (field "flags" (Decode.list flagDecoder))
-        (Decode.succeed "")
 
 
 flagDecoder : Decode.Decoder Flag

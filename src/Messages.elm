@@ -7,5 +7,6 @@ import Category.Messages exposing (..)
 
 type Msg
     = OnFetchAll (Result Http.Error (List Category))
+    | InputChange String
     | CategoryChange String
     | CategoryMsg Category.Messages.Msg
