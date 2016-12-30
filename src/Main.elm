@@ -1,66 +1,65 @@
 module App exposing (..)
 
-import Html exposing (Html, Attribute, div, text, input, program)
-import Html.Attributes exposing (..)
-import Html.Events exposing (onInput)
-import BinaryFormatter exposing (format)
-import BinaryConverter exposing (convert)
+import Html exposing (Html, Attribute, div, text, input, program, span)
+import Html.Attributes exposing (class)
+import Category.View exposing (..)
+import Category.Models exposing (..)
+import Category.Messages exposing (..)
+import Category.Update exposing (..)
+import Commands exposing (..)
+import Messages exposing (..)
 
 
 -- MODEL
 
 
+type alias Msg =
+    Messages.Msg
+
+
 type alias Model =
-    String
+    { error : String
+    , category : Category
+    }
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( "", Cmd.none )
+    ( { error = "", category = Category.Models.default }, fetchAll )
 
 
 
 -- MESSAGES
-
-
-type Msg
-    = Change String
-
-
-
 -- VIEW
 
 
 view : Model -> Html Msg
 view model =
     div []
-        [ input [ placeholder "Object Flags", onInput Change ] []
-        , div [] [ text (inputToBits model) ]
+        [ div [] [ span [ class "error" ] [ text model.error ] ]
+        , Html.map CategoryMsg (Category.View.view model.category)
         ]
-
-
-inputToBits : String -> String
-inputToBits model =
-    if String.length model == 0 then
-        model
-    else
-        case String.toInt model of
-            Err msg ->
-                msg
-
-            Ok val ->
-                "BIN  " ++ BinaryFormatter.format (BinaryConverter.convert val)
 
 
 
 -- UPDATE
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Messages.Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        Change newContent ->
-            ( newContent, Cmd.none )
+        OnFetchAll (Ok categories) ->
+            ( { model | category = Maybe.withDefault model.category <| List.head categories }, Cmd.none )
+
+        OnFetchAll (Err error) ->
+            ( { model | error = httpErrorMapper error }, Cmd.none )
+
+        CategoryMsg subMsg ->
+            let
+                ( newCategory, cmd ) =
+                    Category.Update.update subMsg model.category
+            in
+                ( { model | category = newCategory }, Cmd.map CategoryMsg cmd )
 
 
 
