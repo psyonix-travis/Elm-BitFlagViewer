@@ -6,20 +6,20 @@ import Flag.Models exposing (..)
 import Flag.Messages exposing (..)
 
 
-list : String -> List Flag -> Html Msg
-list label flags =
+list : List Flag -> Html Msg
+list flags =
     div []
         [ table []
-            [ thead [ class "left p2", align "left" ] [ headerRow label ]
+            [ thead [ class "left p2", align "left" ] [ headerRow ]
             , tbody [] (List.map flagRow flags)
             ]
         ]
 
 
-headerRow : String -> Html Msg
-headerRow label =
+headerRow : Html Msg
+headerRow =
     tr []
-        [ th [ class "p1", tdStyle ] [ text label ]
+        [ th [ tdStyle ] [ text "Name" ]
         , th [ tdStyle ] [ text "Value" ]
         , th [ tdStyle ] [ text "Comment" ]
         ]

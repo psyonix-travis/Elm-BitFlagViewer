@@ -8,4 +8,4 @@ import Messages exposing (..)
 
 init : ( Model, Cmd Msg )
 init =
-    ( { error = "", category = Category.Models.default }, fetchAll )
+    ( { input = "", error = "", categories = [], category = Category.Models.default }, fetchAll )
