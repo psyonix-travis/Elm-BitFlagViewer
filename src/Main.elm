@@ -24,7 +24,7 @@ type alias Model =
 
 init : ( Model, Cmd Msg )
 init =
-    ( { input = "", error = "", category = Category.Models.stub }, Cmd.map CategoryMsg fetchAll )
+    ( { input = "", error = "", category = Category.Models.default }, Cmd.map CategoryMsg fetchAll )
 
 
 
@@ -47,7 +47,7 @@ view model =
         , input [ placeholder "Object Flags", onInput Change ] []
         , div []
             [ text (inputToBits model.input)
-            , Html.map CategoryMsg (Category.View.view model.category)
+            , Html.map CategoryMsg (Category.View.view model.category model.input)
             ]
         ]
 

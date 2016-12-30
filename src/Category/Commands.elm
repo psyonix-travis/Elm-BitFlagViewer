@@ -45,19 +45,19 @@ flagDecoder =
         (field "comment" Decode.string)
 
 
-decodeFlagValue : Decode.Decoder (List Int)
+decodeFlagValue : Decode.Decoder Int
 decodeFlagValue =
     Decode.map parseFlagValue Decode.string
 
 
-parseFlagValue : String -> List Int
+parseFlagValue : String -> Int
 parseFlagValue value =
     if (String.left 2 value == "0x") then
         parseFlagValue (String.dropLeft 2 value)
     else
         case (parseIntHex value) of
             Err error ->
-                []
+                0
 
             Ok value ->
-                convertToList value
+                value

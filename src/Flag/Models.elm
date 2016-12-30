@@ -2,7 +2,7 @@ module Flag.Models exposing (..)
 
 
 type alias Flag =
-    { bits : List Int
+    { bits : Int
     , value : String
     , label : String
     , comment : String
