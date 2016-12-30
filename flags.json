@@ -129,6 +129,181 @@
                "comment": "Package has editor-only data filtered"
             }
          ]
+      },
+      {
+        "label": "EClassFlags",
+        "flags": [
+           {
+              "label": "CLASS_None",
+              "value": "0x00000000",
+              "comment": ""
+           },
+           {
+              "label": "CLASS_Abstract",
+              "value": "0x00000001",
+              "comment": "Class is abstract and can't be instantiated directly."
+           },
+           {
+              "label": "CLASS_Compiled",
+              "value": "0x00000002",
+              "comment": "Script has been compiled successfully."
+           },
+           {
+              "label": "CLASS_Config",
+              "value": "0x00000004",
+              "comment": "Load object configuration at construction time."
+           },
+           {
+              "label": "CLASS_Transient",
+              "value": "0x00000008",
+              "comment": "This object type can't be saved; null it out at save time."
+           },
+           {
+              "label": "CLASS_Parsed",
+              "value": "0x00000010",
+              "comment": "Successfully parsed."
+           },
+           {
+              "label": "CLASS_Localized",
+              "value": "0x00000020",
+              "comment": "Class contains localized text."
+           },
+           {
+              "label": "CLASS_SafeReplace",
+              "value": "0x00000040",
+              "comment": "Objects of this class can be safely replaced with default or NULL."
+           },
+           {
+              "label": "CLASS_Native",
+              "value": "0x00000080",
+              "comment": "Class is a native class - native interfaces will have CLASS_Native set, but not RF_Native"
+           },
+           {
+              "label": "CLASS_NoExport",
+              "value": "0x00000100",
+              "comment": "Don't export to C++ header."
+           },
+           {
+              "label": "CLASS_Placeable",
+              "value": "0x00000200",
+              "comment": "Allow users to create in the editor."
+           },
+           {
+              "label": "CLASS_PerObjectConfig",
+              "value": "0x00000400",
+              "comment": "Handle object configuration on a per-object basis, rather than per-class."
+           },
+           {
+              "label": "CLASS_NativeReplication",
+              "value": "0x00000800",
+              "comment": "Replication handled in C++."
+           },
+           {
+              "label": "CLASS_EditInlineNew",
+              "value": "0x00001000",
+              "comment": "Class can be constructed from editinline New button."
+           },
+           {
+              "label": "CLASS_CollapseCategories",
+              "value": "0x00002000",
+              "comment": "Display properties in the editor without using categories."
+           },
+           {
+              "label": "CLASS_Interface",
+              "value": "0x00004000",
+              "comment": "Class is an interface"
+           },
+           {
+              "label": "CLASS_HasInstancedProps",
+              "value": "0x00200000",
+              "comment": "Indicates that this class contains object properties which are marked 'instanced' (or editinline export).  Set by the script compiler after all properties in the class have been parsed.  Used by the loading code as an optimization to attempt to instance newly added properties only for relevant classes"
+           },
+           {
+              "label": "CLASS_NeedsDefProps",
+              "value": "0x00400000",
+              "comment": "Class needs its defaultproperties imported"
+           },
+           {
+              "label": "CLASS_HasComponents",
+              "value": "0x00800000",
+              "comment": "Class has component properties."
+           },
+           {
+              "label": "CLASS_Hidden",
+              "value": "0x01000000",
+              "comment": "Don't show this class in the editor class browser or edit inline new menus."
+           },
+           {
+              "label": "CLASS_Deprecated",
+              "value": "0x02000000",
+              "comment": "Don't save objects of this class when serializing"
+           },
+           {
+              "label": "CLASS_HideDropDown",
+              "value": "0x04000000",
+              "comment": "Class not shown in editor drop down for class selection"
+           },
+           {
+              "label": "CLASS_Exported",
+              "value": "0x08000000",
+              "comment": "Class has been exported to a header file"
+           },
+           {
+              "label": "CLASS_Intrinsic",
+              "value": "0x10000000",
+              "comment": "Class has no unrealscript counter-part"
+           },
+           {
+              "label": "CLASS_NativeOnly",
+              "value": "0x20000000",
+              "comment": "Properties in this class can only be accessed from native code"
+           },
+           {
+              "label": "CLASS_PerObjectLocalized",
+              "value": "0x40000000",
+              "comment": "Handle object localization on a per-object basis, rather than per-class."
+           },
+           {
+              "label": "CLASS_HasCrossLevelRefs",
+              "value": "0x80000000",
+              "comment": "This class has properties that are marked with CPF_CrossLevel"
+           },
+           {
+              "label": "CLASS_IsAUProperty",
+              "value": "0x00008000",
+              "comment": "deprecated - these values now match the values of the EClassCastFlags enum"
+           },
+           {
+              "label": "CLASS_IsAUObjectProperty",
+              "value": "0x00010000",
+              "comment": "deprecated - these values now match the values of the EClassCastFlags enum"
+           },
+           {
+              "label": "CLASS_IsAUBoolProperty",
+              "value": "0x00020000",
+              "comment": "deprecated - these values now match the values of the EClassCastFlags enum"
+           },
+           {
+              "label": "CLASS_IsAUState",
+              "value": "0x00040000",
+              "comment": "deprecated - these values now match the values of the EClassCastFlags enum"
+           },
+           {
+              "label": "CLASS_IsAUFunction",
+              "value": "0x00080000",
+              "comment": "deprecated - these values now match the values of the EClassCastFlags enum"
+           },
+           {
+              "label": "CLASS_IsAUStructProperty",
+              "value": "0x00100000",
+              "comment": "deprecated - these values now match the values of the EClassCastFlags enum"
+           },
+           {
+              "label": "CLASS_AllFlags",
+              "value": "0xFFFFFFFF",
+              "comment": ""
+           }
+         ]
       }
    ]
 }
