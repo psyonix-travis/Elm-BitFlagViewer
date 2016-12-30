@@ -19,7 +19,7 @@ view category =
         , div []
             [ text (inputToBits category.input)
             , filterFlags category.input category.flags
-                |> Flag.View.list category.label
+                |> Flag.View.list
                 |> Html.map FlagMsg
             ]
         ]
