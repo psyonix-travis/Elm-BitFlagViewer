@@ -18,4 +18,10 @@ tests =
             , test "10000" <| \() -> Expect.equal "10011100010000" (convert 10000)
             , test "2147483647" <| \() -> Expect.equal "1111111111111111111111111111111" (convert 2147483647)
             ]
+        , describe "convertToList"
+            [ test "1" <| \() -> Expect.equal [ 1 ] (convertToList 1)
+            , test "2" <| \() -> Expect.equal [ 2 ] (convertToList 2)
+            , test "3" <| \() -> Expect.equal [ 1, 2 ] (convertToList 3)
+            , test "100" <| \() -> Expect.equal [ 3, 6, 7 ] (convertToList 100)
+            ]
         ]

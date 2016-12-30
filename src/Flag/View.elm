@@ -28,8 +28,8 @@ headerRow label =
 flagRow : Flag -> Html Msg
 flagRow flag =
     tr []
-        [ td [ tdStyle ] [ text flag.value ]
-        , td [ tdStyle ] [ text flag.label ]
+        [ td [ tdStyle ] [ text flag.label ]
+        , td [ tdStyle ] [ text flag.value ]
         , td [ tdStyle ] [ text flag.comment ]
         ]
 
