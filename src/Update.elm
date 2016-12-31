@@ -5,13 +5,18 @@ import Messages exposing (..)
 import Model exposing (..)
 import Category.Update exposing (..)
 import Category.Models exposing (..)
+import Dict
 
 
 update : Messages.Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         OnFetchAll (Ok categories) ->
-            ( { model | categories = categories, category = Maybe.withDefault model.category <| List.head categories }, Cmd.none )
+            let
+                categoryList =
+                    categoryListToDict categories
+            in
+                ( { model | categories = categoryList, category = Maybe.withDefault model.category <| List.head <| Dict.values categoryList }, Cmd.none )
 
         OnFetchAll (Err error) ->
             ( { model | error = httpErrorMapper error }, Cmd.none )
@@ -20,7 +25,7 @@ update msg model =
             ( { model | input = input }, Cmd.none )
 
         CategoryChange label ->
-            ( { model | category = lookupCategoryByLabel label model.categories }, Cmd.none )
+            ( setCategoryByLabel label model, Cmd.none )
 
         CategoryMsg subMsg ->
             let
@@ -49,14 +54,17 @@ httpErrorMapper err =
             "HTTP BadPayload: " ++ s
 
 
-lookupCategoryByLabel : String -> List Category -> Category
-lookupCategoryByLabel label categories =
-    case List.head categories of
+setCategoryByLabel : String -> Model -> Model
+setCategoryByLabel label model =
+    case Dict.get label model.categories of
         Nothing ->
-            Category.Models.default
+            { model | category = Category.Models.default, error = "Invalid category: " ++ label }
 
         Just category ->
-            if (category.label == label) then
-                category
-            else
-                lookupCategoryByLabel label <| List.drop 1 categories
+            { model | category = category }
+
+
+categoryListToDict : List Category -> CategoryList
+categoryListToDict inList =
+    List.map (\x -> ( x.label, x )) inList
+        |> Dict.fromList

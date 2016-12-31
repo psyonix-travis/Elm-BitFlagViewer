@@ -10,13 +10,16 @@ import Model exposing (..)
 import Json.Decode
 import BinaryFormatter exposing (format)
 import BinaryConverter exposing (convert)
+import Dict
 
 
 view : Model -> Html Msg
 view model =
     div []
         [ div []
-            [ select [ onChange CategoryChange ] <| List.map categoryOption model.categories
+            [ Dict.keys model.categories
+                |> List.map categoryOption
+                |> select [ onChange CategoryChange ]
             ]
         , input [ placeholder model.category.label, onInput InputChange ] []
         , text (inputToBits model.input)
@@ -43,6 +46,6 @@ onChange tagger =
     on "change" (Json.Decode.map tagger targetValue)
 
 
-categoryOption : Category -> Html Msg
-categoryOption category =
-    option [] [ text category.label ]
+categoryOption : String -> Html Msg
+categoryOption label =
+    option [] [ text label ]
