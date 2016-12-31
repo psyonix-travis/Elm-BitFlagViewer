@@ -17,7 +17,7 @@ fetchAll =
 
 flagsUrl : String
 flagsUrl =
-    "./../flags.json"
+    "http://localhost:4000/categories"
 
 
 
@@ -26,7 +26,7 @@ flagsUrl =
 
 collectionDecoder : Decode.Decoder (List Category)
 collectionDecoder =
-    (field "categories" (Decode.list categoryDecoder))
+    Decode.list categoryDecoder
 
 
 categoryDecoder : Decode.Decoder Category

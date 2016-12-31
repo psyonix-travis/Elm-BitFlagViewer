@@ -4,7 +4,6 @@
     "repository": "https://github.com/psyonix-travis/elm-bitflagviewer.git",
     "license": "MIT",
     "source-directories": [
-        ".",
         "./src/"
     ],
     "exposed-modules": [],
