@@ -5,8 +5,9 @@ import Category.Models exposing (..)
 import Commands exposing (..)
 import Messages exposing (..)
 import Dict
+import Set
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( { input = "", error = "", categories = Dict.empty, category = Category.Models.default }, fetchAll )
+    ( { input = Set.empty, error = "", categories = Dict.empty, category = "" }, fetchAll )

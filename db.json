@@ -304,6 +304,311 @@
               "comment": ""
            }
          ]
+      },
+      {
+        "label": "EObjectFlags",
+        "flags": [
+           {
+              "label": "",
+              "value": "0x0000000000000001",
+              "comment": "unused"
+           },
+           {
+              "label": "RF_InSingularFunc",
+              "value": "0x0000000000000002",
+              "comment": "In a singular function."
+           },
+           {
+              "label": "RF_StateChanged",
+              "value": "0x0000000000000004",
+              "comment": "Object did a state change."
+           },
+           {
+              "label": "RF_DebugPostLoad",
+              "value": "0x0000000000000008",
+              "comment": "For debugging PostLoad calls."
+           },
+           {
+              "label": "RF_DebugSerialize",
+              "value": "0x0000000000000010",
+              "comment": "For debugging Serialize calls."
+           },
+           {
+              "label": "RF_DebugFinishDestroyed",
+              "value": "0x0000000000000020",
+              "comment": "For debugging FinishDestroy calls."
+           },
+           {
+              "label": "RF_EdSelected",
+              "value": "0x0000000000000040",
+              "comment": "Object is selected in one of the editors browser windows."
+           },
+           {
+              "label": "RF_ZombieComponent",
+              "value": "0x0000000000000080",
+              "comment": "This component's template was deleted, so should not be used."
+           },
+           {
+              "label": "RF_Protected",
+              "value": "0x0000000000000100",
+              "comment": "Property is protected (may only be accessed from its owner class or subclasses)"
+           },
+           {
+              "label": "RF_ClassDefaultObject",
+              "value": "0x0000000000000200",
+              "comment": "this object is its class's default object"
+           },
+           {
+              "label": "RF_ArchetypeObject",
+              "value": "0x0000000000000400",
+              "comment": "this object is a template for another object - treat like a class default object"
+           },
+           {
+              "label": "RF_ForceTagExp",
+              "value": "0x0000000000000800",
+              "comment": "Forces this object to be put into the export table when saving a package regardless of outer"
+           },
+           {
+              "label": "RF_TokenStreamAssembled",
+              "value": "0x0000000000001000",
+              "comment": "Set if reference token stream has already been assembled"
+           },
+           {
+              "label": "RF_MisalignedObject",
+              "value": "0x0000000000002000",
+              "comment": "Object's size no longer matches the size of its C++ class (only used during make, for native classes whose properties have changed)"
+           },
+           {
+              "label": "RF_RootSet",
+              "value": "0x0000000000004000",
+              "comment": "Object will not be garbage collected, even if unreferenced."
+           },
+           {
+              "label": "RF_BeginDestroyed",
+              "value": "0x0000000000008000",
+              "comment": "BeginDestroy has been called on the object."
+           },
+           {
+              "label": "RF_FinishDestroyed",
+              "value": "0x0000000000010000",
+              "comment": "FinishDestroy has been called on the object."
+           },
+           {
+              "label": "RF_DebugBeginDestroyed",
+              "value": "0x0000000000020000",
+              "comment": "Whether object is rooted as being part of the root set (garbage collection)"
+           },
+           {
+              "label": "RF_MarkedByCooker",
+              "value": "0x0000000000040000",
+              "comment": "Marked by content cooker."
+           },
+           {
+              "label": "RF_LocalizedResource",
+              "value": "0x0000000000080000",
+              "comment": "Whether resource object is localized."
+           },
+           {
+              "label": "RF_InitializedProps",
+              "value": "0x0000000000100000",
+              "comment": "whether InitProperties has been called on this object"
+           },
+           {
+              "label": "RF_PendingFieldPatches",
+              "value": "0x0000000000200000",
+              "comment": "@script patcher: indicates that this struct will receive additional member properties from the script patcher"
+           },
+           {
+              "label": "RF_IsCrossLevelReferenced",
+              "value": "0x0000000000400000",
+              "comment": "This object has been pointed to by a cross-level reference, and therefore requires additional cleanup upon deletion"
+           },
+           {
+              "label": "",
+              "value": "0x0000000000800000",
+              "comment": "unused"
+           },
+           {
+              "label": "",
+              "value": "0x0000000001000000",
+              "comment": "unused"
+           },
+           {
+              "label": "RF_Template",
+              "value": "0x0000000002000000",
+              "comment": "object is part of a CDO or archetype"
+           },
+           {
+              "label": "RF_SubscribedToEvents",
+              "value": "0x0000000010000000",
+              "comment": "object has an entry in ObjectSubscribedEventsMap"
+           },
+           {
+              "label": "RF_Saved",
+              "value": "0x0000000080000000",
+              "comment": "Object has been saved via SavePackage. Temporary."
+           },
+           {
+              "label": "RF_Transactional",
+              "value": "0x0000000100000000",
+              "comment": "Object is transactional."
+           },
+           {
+              "label": "RF_Unreachable",
+              "value": "0x0000000200000000",
+              "comment": "Object is not reachable on the object graph."
+           },
+           {
+              "label": "RF_Public",
+              "value": "0x0000000400000000",
+              "comment": "Object is visible outside its package."
+           },
+           {
+              "label": "RF_TagImp",
+              "value": "0x0000000800000000",
+              "comment": "Temporary import tag in load/save."
+           },
+           {
+              "label": "RF_TagExp",
+              "value": "0x0000001000000000",
+              "comment": "Temporary export tag in load/save."
+           },
+           {
+              "label": "RF_Obsolete",
+              "value": "0x0000002000000000",
+              "comment": "Object marked as obsolete and should be replaced."
+           },
+           {
+              "label": "RF_TagGarbage",
+              "value": "0x0000004000000000",
+              "comment": "Check during garbage collection."
+           },
+           {
+              "label": "RF_DisregardForGC",
+              "value": "0x0000008000000000",
+              "comment": "Object is being disregard for GC as its static and itself and all references are always loaded."
+           },
+           {
+              "label": "RF_PerObjectLocalized",
+              "value": "0x0000010000000000",
+              "comment": "Object is localized by instance name, not by class."
+           },
+           {
+              "label": "RF_NeedLoad",
+              "value": "0x0000020000000000",
+              "comment": "During load, indicates object needs loading."
+           },
+           {
+              "label": "RF_AsyncLoading",
+              "value": "0x0000040000000000",
+              "comment": "Object is being asynchronously loaded."
+           },
+           {
+              "label": "RF_NeedPostLoadSubobjects",
+              "value": "0x0000080000000000",
+              "comment": "During load, indicates that the object still needs to instance subobjects and fixup serialized component references"
+           },
+           {
+              "label": "RF_Suppress",
+              "value": "0x0000100000000000",
+              "comment": "@warning: Mirrored in UnName.h. Suppressed log name."
+           },
+           {
+              "label": "RF_InEndState",
+              "value": "0x0000200000000000",
+              "comment": "Within an EndState call."
+           },
+           {
+              "label": "RF_Transient",
+              "value": "0x0000400000000000",
+              "comment": "Don't save object."
+           },
+           {
+              "label": "RF_Cooked",
+              "value": "0x0000800000000000",
+              "comment": "Whether the object has already been cooked"
+           },
+           {
+              "label": "RF_LoadForClient",
+              "value": "0x0001000000000000",
+              "comment": "In-file load for client."
+           },
+           {
+              "label": "RF_LoadForServer",
+              "value": "0x0002000000000000",
+              "comment": "In-file load for server."
+           },
+           {
+              "label": "RF_LoadForEdit",
+              "value": "0x0004000000000000",
+              "comment": "In-file load for editor."
+           },
+           {
+              "label": "RF_Standalone",
+              "value": "0x0008000000000000",
+              "comment": "Keep object around for editing even if unreferenced."
+           },
+           {
+              "label": "RF_NotForClient",
+              "value": "0x0010000000000000",
+              "comment": "Don't load this object for the game client."
+           },
+           {
+              "label": "RF_NotForServer",
+              "value": "0x0020000000000000",
+              "comment": "Don't load this object for the game server."
+           },
+           {
+              "label": "RF_NotForEdit",
+              "value": "0x0040000000000000",
+              "comment": "Don't load this object for the game editor."
+           },
+           {
+              "label": "",
+              "value": "0x0080000000000000",
+              "comment": "unused"
+           },
+           {
+              "label": "RF_NeedPostLoad",
+              "value": "0x0100000000000000",
+              "comment": "Object needs to be postloaded."
+           },
+           {
+              "label": "RF_HasStack",
+              "value": "0x0200000000000000",
+              "comment": "Has execution stack."
+           },
+           {
+              "label": "RF_Native",
+              "value": "0x0400000000000000",
+              "comment": "Native (UClass only)."
+           },
+           {
+              "label": "RF_Marked",
+              "value": "0x0800000000000000",
+              "comment": "Marked (for debugging)."
+           },
+           {
+              "label": "RF_ErrorShutdown",
+              "value": "0x1000000000000000",
+              "comment": "ShutdownAfterError called."
+           },
+           {
+              "label": "RF_PendingKill",
+              "value": "0x2000000000000000",
+              "comment": "Objects that are pending destruction (invalid for gameplay but valid objects)"
+           },
+           {
+              "label": "RF_MarkedByCookerTemp",
+              "value": "0x4000000000000000",
+              "comment": "Temporarily marked by content cooker - should be cleared."
+           },
+           {
+              "label": "RF_CookedStartupObject",
+              "value": "0x8000000000000000",
+              "comment": "This object was cooked into a startup package."
+           }
+         ]
       }
    ]
 }

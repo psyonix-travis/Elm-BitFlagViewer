@@ -5,8 +5,8 @@ import Json.Decode as Decode exposing (field)
 import ParseInt exposing (parseIntHex)
 import Category.Models exposing (..)
 import Flag.Models exposing (..)
-import BinaryConverter exposing (convertToList)
 import Messages exposing (..)
+import Set exposing (empty)
 
 
 fetchAll : Cmd Msg
@@ -39,7 +39,7 @@ categoryDecoder =
 flagDecoder : Decode.Decoder Flag
 flagDecoder =
     Decode.map4 Flag
-        (field "value" decodeFlagValue)
+        (Decode.succeed Set.empty)
         (field "value" Decode.string)
         (field "label" Decode.string)
         (field "comment" Decode.string)
