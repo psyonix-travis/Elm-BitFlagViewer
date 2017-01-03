@@ -10,7 +10,7 @@ list : List Flag -> Html Msg
 list flags =
     div []
         [ table []
-            [ thead [ class "left p2", align "left" ] [ headerRow ]
+            [ thead [ align "left" ] [ headerRow ]
             , tbody [] (List.map flagRow flags)
             ]
         ]
@@ -20,6 +20,7 @@ headerRow : Html Msg
 headerRow =
     tr []
         [ th [ tdStyle ] [ text "Name" ]
+          --, th [ tdStyle ] [ text "Bits" ]
         , th [ tdStyle ] [ text "Value" ]
         , th [ tdStyle ] [ text "Comment" ]
         ]
@@ -29,6 +30,7 @@ flagRow : Flag -> Html Msg
 flagRow flag =
     tr []
         [ td [ tdStyle ] [ text flag.label ]
+          --, td [ tdStyle ] [ text <| toString <| Set.toList flag.bits ]
         , td [ tdStyle ] [ text flag.value ]
         , td [ tdStyle ] [ text flag.comment ]
         ]

@@ -1,7 +1,8 @@
-module Model exposing (Model, CategoryList)
+module Model exposing (..)
 
 import Category.Models exposing (Category)
 import Dict exposing (Dict)
+import Set exposing (Set)
 
 
 type alias CategoryList =
@@ -9,8 +10,21 @@ type alias CategoryList =
 
 
 type alias Model =
-    { input : String
+    { input : Set Int
     , error : String
     , categories : CategoryList
-    , category : Category
+    , category : String
+    }
+
+
+type alias FlagConversionRequest =
+    { category : String
+    , flag : String
+    }
+
+
+type alias FlagConversionResponse =
+    { category : String
+    , flag : String
+    , values : List Int
     }

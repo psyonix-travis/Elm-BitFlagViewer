@@ -6,6 +6,7 @@ import View exposing (view)
 import Update exposing (update)
 import Model exposing (..)
 import Init exposing (init)
+import Port
 
 
 -- SUBSCRIPTIONS
@@ -13,7 +14,7 @@ import Init exposing (init)
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.none
+    Port.flagConverted OnFlagConverted
 
 
 
