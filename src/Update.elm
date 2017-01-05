@@ -3,14 +3,14 @@ module Update exposing (update)
 import Http
 import Messages exposing (..)
 import Model exposing (..)
-import Category.Models exposing (..)
+import Category exposing (Category,default)
 import Dict
 import Port
-import Flag.Models
+import Flag
 import Set
 
 
-update : Messages.Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         OnFetchAll (Ok categories) ->
@@ -19,7 +19,7 @@ update msg model =
                     categoryListToDict categories
 
                 firstCategory =
-                    Maybe.withDefault Category.Models.default <| List.head <| Dict.values categoryList
+                    Maybe.withDefault Category.default <| List.head <| Dict.values categoryList
             in
                 ( { model | categories = categoryList, category = firstCategory.label }, Cmd.batch <| List.map requestCategoryFlagConversion categories )
 
@@ -38,7 +38,7 @@ update msg model =
         CategoryChange label ->
             ( { model | category = label }, Cmd.none )
 
-        CategoryMsg subMsg ->
+        FlagMsg subMsg ->
             ( model, Cmd.none )
 
 
@@ -88,7 +88,7 @@ updateCat response category =
             Just { category | flags = (updateCategoryFlag response category.flags) }
 
 
-updateCategoryFlag : FlagConversionResponse -> List Flag.Models.Flag -> List Flag.Models.Flag
+updateCategoryFlag : FlagConversionResponse -> List Flag.Model -> List Flag.Model
 updateCategoryFlag response flags =
     let
         select existingFlag =

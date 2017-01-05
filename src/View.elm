@@ -3,9 +3,8 @@ module View exposing (view)
 import Html exposing (Html, Attribute, div, text, input, span, select, option)
 import Html.Attributes exposing (class, placeholder)
 import Html.Events exposing (onInput)
-import Category.View exposing (view)
-import Category.Models exposing (Category)
-import Messages exposing (..)
+import Category exposing (Category,view,default)
+import Messages exposing (Msg(..))
 import Model exposing (..)
 import BinaryFormatter exposing (format)
 import Dict
@@ -23,7 +22,7 @@ view model =
         , input [ placeholder model.category, onInput InputChange ] []
           --, text (inputToBits model.input)
         , div [] [ span [ class "error" ] [ text model.error ] ]
-        , Html.map CategoryMsg (Category.View.view model.input <| getActiveCategory model)
+        , Html.map FlagMsg (Category.view model.input <| getActiveCategory model)
         ]
 
 
@@ -31,7 +30,7 @@ getActiveCategory : Model -> Category
 getActiveCategory model =
     case Dict.get model.category model.categories of
         Nothing ->
-            Category.Models.default
+            Category.default
 
         Just category ->
             category

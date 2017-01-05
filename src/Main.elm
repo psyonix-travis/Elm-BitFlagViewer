@@ -1,15 +1,25 @@
 module Main exposing (..)
 
+import Dict
+import Set
 import Html exposing (program)
-import Messages exposing (..)
 import View exposing (view)
 import Update exposing (update)
-import Model exposing (..)
-import Init exposing (init)
 import Port
+import Model exposing (Model)
+import Commands exposing (fetchAll)
+import Messages exposing (Msg(OnFlagConverted))
 
 
--- SUBSCRIPTIONS
+init : ( Model, Cmd Msg )
+init =
+    ( { input = Set.empty
+      , error = ""
+      , categories = Dict.empty
+      , category = ""
+      }
+    , fetchAll
+    )
 
 
 subscriptions : Model -> Sub Msg
@@ -17,14 +27,10 @@ subscriptions model =
     Port.flagConverted OnFlagConverted
 
 
-
--- MAIN
-
-
 main : Program Never Model Msg
 main =
     program
-        { init = Init.init
+        { init = init
         , view = View.view
         , update = Update.update
         , subscriptions = subscriptions
