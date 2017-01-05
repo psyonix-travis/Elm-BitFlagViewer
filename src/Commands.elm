@@ -3,8 +3,8 @@ module Commands exposing (..)
 import Http
 import Json.Decode as Decode exposing (field)
 import ParseInt exposing (parseIntHex)
-import Category.Models exposing (..)
-import Flag.Models exposing (..)
+import Category exposing (Category)
+import Flag
 import Messages exposing (..)
 import Set exposing (empty)
 
@@ -36,9 +36,9 @@ categoryDecoder =
         (field "flags" (Decode.list flagDecoder))
 
 
-flagDecoder : Decode.Decoder Flag
+flagDecoder : Decode.Decoder Flag.Model
 flagDecoder =
-    Decode.map4 Flag
+    Decode.map4 Flag.Model
         (Decode.succeed Set.empty)
         (field "value" Decode.string)
         (field "label" Decode.string)

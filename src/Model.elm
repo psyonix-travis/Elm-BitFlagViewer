@@ -1,6 +1,6 @@
 module Model exposing (..)
 
-import Category.Models exposing (Category)
+import Category exposing (Category)
 import Dict exposing (Dict)
 import Set exposing (Set)
 
