@@ -10,14 +10,17 @@ interval =
 
 format : String -> String
 format value =
-    String.padLeft (getLeftPadCount value) '0' value
+    String.padLeft (getLeftPadCount <| String.length value) '0' value
         |> Delimiter.format interval " "
 
 
-getLeftPadCount : String -> Int
-getLeftPadCount value =
+getLeftPadCount : Int -> Int
+getLeftPadCount strLen =
     let
-        strLen =
-            String.length value
+        modulo =
+            strLen % interval
     in
-        strLen + (interval - (strLen % interval))
+        if (modulo == 0) then
+            strLen
+        else
+            strLen + interval - modulo
